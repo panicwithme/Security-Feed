@@ -16,20 +16,25 @@ function loadFeed(source, url) {
           for(let entry of feed.entries) {
               let date = new Date(entry.date_ms);
               date = date.toLocaleString();
+
               let li = document.createElement('li');
               li.className = "list-group-item d-flex justify-content-between align-items-start";
+              
               let divOuter = document.createElement('div');
               divOuter.className = "ms-2 me-auto";
+              divOuter.innerHTML = source;
+              
               let divInner = document.createElement('div');
               divInner.className = "fw-bold";
               divInner.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
-              divOuter.appendChild(divInner);
-              divOuter.innerHTML = source;
-              li.appendChild(divOuter);
+              
               let span = document.createElement('span');
               span.className = "badge bg-primary rounded-pill";
               span.innerHTML = date;
+
               li.appendChild(span);
+              divOuter.appendChild(divInner);
+              li.appendChild(divOuter);
               textarea.appendChild(li);
           }
         });
