@@ -40,8 +40,11 @@ const createEl = (el, className, innerHTML) => {
     return ret;
 };
 
-              let paragraph = document.createElement('p');
-              paragraph.innerHTML = source;
+const sortByDate = (a, b) => {
+    if(a.date_ms > b.date_ms) return -1;
+    else if(a.date_ms == b.date_ms) return 0;
+    else return 1;
+};
 
 (async (urls) => {
     let feeds = [];
