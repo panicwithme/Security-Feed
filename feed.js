@@ -18,8 +18,8 @@ function getEntries(source, url) {
             let entryTitle = entry.title;
             let entryDate = entry.date_ms;
             entries[entryDate] = [entryTitle, entryLink, source];
+            console.log(entries[entryDate]);
           }
-          console.log(entries[entryDate]);
         });
 }
 
