@@ -19,7 +19,7 @@ function getEntries(source, url) {
             let entryDate = entry.date_ms;
             entries[entryDate] = [entryTitle, entryLink, source];
           }
-
+          console.log(entries[entryDate]);
         });
 }
 
