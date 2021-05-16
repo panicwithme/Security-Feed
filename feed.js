@@ -11,11 +11,13 @@ const textarea = document.querySelector('#feed-area > ul');
 function loadFeed(source, url) {
     feednami.load(url)
         .then(feed => {
-          textarea.value = ''
+          textarea.value = '';
           console.log(feed);
           for(let entry of feed.entries) {
+              let date = new Date(entry.date_ms);
+              date = date.toLocaleString();
               let li = document.createElement('li');
-              li.innerHTML = source + ` <a href="${entry.link}">${entry.title}</a>` + `<p>${entry.date}</p>`;
+              li.innerHTML = source + ` <a href="${entry.link}">${entry.title}</a>` + date;
               textarea.appendChild(li);
           }
         });
