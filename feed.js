@@ -22,17 +22,20 @@ function loadFeed(source, url) {
               
               let divOuter = document.createElement('div');
               divOuter.className = "ms-2 me-auto";
-              divOuter.innerHTML = source;
               
               let divInner = document.createElement('div');
               divInner.className = "fw-bold";
               divInner.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
+
+              let paragraph = document.createElement('p');
+              paragraph.innerHTML = source;
               
               let span = document.createElement('span');
               span.className = "badge bg-primary rounded-pill";
               span.innerHTML = date;
 
               divOuter.appendChild(divInner);
+              divOuter.appendChild(paragraph);
               li.appendChild(divOuter);
               li.appendChild(span);
               textarea.appendChild(li);
