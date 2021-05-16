@@ -14,6 +14,7 @@ const renderFeeds = (feeds) => {
     document.querySelector('.primary-heading').style.display = 'none';
     
     feeds.forEach(feed => {
+        
         const date = new Date(feed.date_ms).toLocaleString(),
         
         li = createEl('li', "list-group-item d-flex justify-content-between align-items-start"),
@@ -31,6 +32,7 @@ const renderFeeds = (feeds) => {
         li.appendChild(divOuter);
         li.appendChild(span);
         textarea.appendChild(li);
+        
     });
 
 }
@@ -56,8 +58,14 @@ const sortByDate = (a, b) => {
     for(el in urls)
         try {
             (await feednami.load(urls[el])).entries.forEach(feed => {
-                feed.source = el;
-                feeds.push(feed);
+                const month = new Date(feed.date_ms).getMonth();
+                const year = new Date(feed.date_ms).getFullYear();
+                const current_month = new Date().getMonth();
+                const current_year = new Date().getFullYear();
+                if (month == current_month && year == current_year) {
+                    feed.source = el;
+                    feeds.push(feed);
+                }
             });
         } catch(err) { continue; }
 
