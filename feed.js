@@ -12,7 +12,7 @@ function loadFeed(source, url) {
           console.log(feed);
           for(let entry of feed.entries) {
               let li = document.createElement('li');
-              li.innerHTML = source + ' <a href="${entry.link}">${entry.title}</a>';
+              li.innerHTML = source + ` <a href="${entry.link}">${entry.title}</a>`;
               textarea.appendChild(li);
           }
         });
