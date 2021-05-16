@@ -1,4 +1,4 @@
-const url = 'https://threatpost.com/feed'
+const url = 'https://www.wired.com/feed/category/security/latest/rss'
 
 const textarea = document.getElementByID('feed-area')
 
