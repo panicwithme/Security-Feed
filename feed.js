@@ -18,11 +18,15 @@ const renderFeeds = (feeds) => {
         
         li = createEl('li', "list-group-item d-flex justify-content-between align-items-start"),
         divOuter = createEl('div', "ms-2 me-auto"),
-        divInner = createEl('div', "fw-bold", `<a href="${feed.link}">${feed.title}</a>`),
-        paragraph = createEl('p', '', feed.source),
+        divInner = createEl('div', "fw-bold", `<a href="${feed.link}">${feed.title.slice(0,150)}</a>`),
+        divInner2 = createEl('div', '', ''),
+        span_source = createEl('span', "badge bg-secondary rounded-pill", feed.source),
+        paragraph = createEl('p', '', feed.description.slice(0,300)),
         span = createEl('span', "badge bg-dark rounded-pill", date);
 
+        divInner2.appendChild(span_source);
         divOuter.appendChild(divInner);
+        divOuter.appendChild(divInner2);
         divOuter.appendChild(paragraph);
         li.appendChild(divOuter);
         li.appendChild(span);
