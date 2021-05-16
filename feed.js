@@ -32,9 +32,9 @@ function loadFeed(source, url) {
               span.className = "badge bg-primary rounded-pill";
               span.innerHTML = date;
 
-              li.appendChild(span);
               divOuter.appendChild(divInner);
               li.appendChild(divOuter);
+              li.appendChild(span);
               textarea.appendChild(li);
           }
         });
