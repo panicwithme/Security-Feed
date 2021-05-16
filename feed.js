@@ -2,6 +2,7 @@ var urls = {
     'Wired Security'  : 'https://www.wired.com/feed/category/security/latest/rss',
     'TheHackerNews'   : 'http://feeds.feedburner.com/TheHackersNews?format=xml',
     'Dark Reading'    : 'https://www.darkreading.com/rss_simple.asp',
+    'KrebsonSecurity' : 'https://krebsonsecurity.com/feed',
 };
 
 const textarea = document.querySelector('#feed-area > ul');
