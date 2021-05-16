@@ -6,7 +6,7 @@ var urls = {
     'ThreatPost'      : 'https://threatpost.com/feed',
 };
 
-const textarea = document.querySelector('#feed-area > ul');
+const textarea = document.querySelector('#feed-area > ol');
 
 function loadFeed(source, url) {
     feednami.load(url)
@@ -17,7 +17,19 @@ function loadFeed(source, url) {
               let date = new Date(entry.date_ms);
               date = date.toLocaleString();
               let li = document.createElement('li');
-              li.innerHTML = source + ` <a href="${entry.link}">${entry.title}</a>` + date;
+              li.className = "list-group-item d-flex justify-content-between align-items-start";
+              let divOuter = document.createElement('div');
+              divOuter.className = "ms-2 me-auto";
+              let divInner = document.createElement('div');
+              divInner.className = "fw-bold";
+              divInner.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
+              divOuter.appendChild(divInner);
+              divOuter.innerHTML = source;
+              li.appendChild(divOuter);
+              let span = document.createElement('span');
+              span.className = "badge bg-primary rounded-pill";
+              span.innerHTML = date;
+              li.appendChild(span);
               textarea.appendChild(li);
           }
         });
