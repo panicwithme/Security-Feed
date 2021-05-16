@@ -25,7 +25,7 @@ function getEntries(source, url) {
 
 function loadEntries(date, info) {
 
-    let date = new Date(date);
+    date = new Date(date);
     date = date.toLocaleString();
 
     let li = document.createElement('li');
