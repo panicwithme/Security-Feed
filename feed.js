@@ -16,7 +16,7 @@ function getEntries(source, url) {
           for(let entry of feed.entries) {
             let entryLink = entry.link;
             let entryTitle = entry.title;
-            let entryDate = new Date(entry.date_ms);
+            let entryDate = entry.date_ms;
             entries[entryDate] = [entryTitle, entryLink, source];
           }
 
