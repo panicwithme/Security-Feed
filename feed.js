@@ -29,7 +29,7 @@ function loadFeed(source, url) {
               paragraph.innerHTML = source;
 
               let span = document.createElement('span');
-              span.className = "badge bg-primary rounded-pill";
+              span.className = "badge bg-dark rounded-pill";
               span.innerHTML = date;
 
               divOuter.appendChild(divInner);
