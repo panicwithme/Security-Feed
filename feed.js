@@ -24,7 +24,6 @@ function getEntries(source, url) {
 }
 
 function loadEntries(date, info) {
-    textarea.value = '';
 
     let date = new Date(date);
     date = date.toLocaleString();
@@ -58,6 +57,7 @@ for (var url_source in urls) {
 }
 
 entry_dates = Object.keys(entries).sort();
+textarea.value = '';
 for (var entry_date in entries) {
     loadEntries(entry_date, entries[entry_date]);
 }
