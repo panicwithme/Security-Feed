@@ -1,4 +1,4 @@
-var urls = {
+const urls = {
     'Wired Security'  : 'https://www.wired.com/feed/category/security/latest/rss',
     'TheHackerNews'   : 'http://feeds.feedburner.com/TheHackersNews?format=xml',
     'Dark Reading'    : 'https://www.darkreading.com/rss_simple.asp',
@@ -6,40 +6,49 @@ var urls = {
     'ThreatPost'      : 'https://threatpost.com/feed',
 };
 
-const textarea = document.querySelector('#feed-area > ol');
-function loadFeed(source, url) {
-    feednami.load(url)
-        .then(feed => {
-          textarea.value = '';
-          console.log(feed);
-          for(let entry of feed.entries) {
-              let date = new Date(entry.date_ms);
-              date = date.toLocaleString();
-              let li = document.createElement('li');
-              li.className = "list-group-item d-flex justify-content-between align-items-start";
+const renderFeeds = (feeds) => {
+    const textarea = document.querySelector('#feed-area > ol');
+    textarea.value = '';
+    document.querySelector('.primary-heading').style.display = 'none';
+    feeds.forEach(feed => {
+        const date = new Date(feed.date_ms).toLocaleString(),
+        li = createEl('li', "list-group-item d-flex justify-content-between align-items-start"),
+        divOuter = createEl('div', "ms-2 me-auto"),
+        divInner = createEl('div', "fw-bold", `<a href="${feed.link}">${feed.title}</a>`),
+        paragraph = createEl('p', '', feed.source),
+        span = createEl('span', "badge bg-dark rounded-pill", date);
 
-              let divOuter = document.createElement('div');
-              divOuter.className = "ms-2 me-auto";
-
-              let divInner = document.createElement('div');
-              divInner.className = "fw-bold";
-              divInner.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
-
-              let paragraph = document.createElement('p');
-              paragraph.innerHTML = source;
-
-              let span = document.createElement('span');
-              span.className = "badge bg-dark rounded-pill";
-              span.innerHTML = date;
-
-              divOuter.appendChild(divInner);
-              divOuter.appendChild(paragraph);
-              li.appendChild(divOuter);
-              li.appendChild(span);
-              textarea.appendChild(li);
-          }
-        });
+        divOuter.appendChild(divInner);
+        divOuter.appendChild(paragraph);
+        li.appendChild(divOuter);
+        li.appendChild(span);
+        textarea.appendChild(li);
+    });
 }
-for (var url_source in urls) {
-    loadFeed(url_source, urls[url_source]);
-}
+
+const createEl = (el, className, innerHTML) => {
+    let ret = document.createElement(el);
+    ret.className = className ? className : '';
+    ret.innerHTML = innerHTML ? innerHTML : '';
+    return ret;
+};
+
+const sortByDate = (a, b) => {
+    if(a.date_ms > b.date_ms) return -1;
+    else if(a.date_ms == b.date_ms) return 0;
+    else return 1;
+};
+
+(async (urls) => {
+    let feeds = [];
+    for(el in urls)
+        try {
+            (await feednami.load(urls[el])).entries.forEach(feed => {
+                feed.source = el;
+                feeds.push(feed);
+            });
+        } catch(err) { continue; }
+
+    feeds.sort(sortByDate);
+    renderFeeds(feeds);
+})(urls);
