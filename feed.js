@@ -1,21 +1,23 @@
-var urls = [
-    'https://www.wired.com/feed/category/security/latest/rss',
-    'http://feeds.feedburner.com/TheHackersNews?format=xml'
-];
+var urls = {
+    'Wired Security' : 'https://www.wired.com/feed/category/security/latest/rss',
+    'TheHackerNews'  : 'http://feeds.feedburner.com/TheHackersNews?format=xml'
+};
 
 const textarea = document.querySelector('#feed-area > ul');
 
-function loadFeed(url) {
+function loadFeed(source, url) {
     feednami.load(url)
         .then(feed => {
           textarea.value = ''
           console.log(feed);
           for(let entry of feed.entries) {
               let li = document.createElement('li');
-              li.innerHTML = `<a href="${entry.link}">${entry.title}</a>`;
+              li.innerHTML = source + ' <a href="${entry.link}">${entry.title}</a>';
               textarea.appendChild(li);
           }
         });
 }
 
-urls.forEach(loadFeed);
+for (var url_source in urls) {
+    loadFeed(url_source, urls[url_source]);
+}
