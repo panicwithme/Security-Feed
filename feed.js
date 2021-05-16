@@ -12,7 +12,7 @@ const textarea = document.querySelector('#feed-area > ol');
 function getEntries(source, url) {
     feednami.load(url)
         .then(feed => {
-
+          console.log(feed);
           for(let entry of feed.entries) {
             let entryLink = entry.link;
             let entryTitle = entry.title;
