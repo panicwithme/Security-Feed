@@ -14,7 +14,7 @@ feednami.load(url)
       }
     });
 
-feednami.load(url)
+feednami.load(url2)
     .then(feed => {
      textarea.value = ''
      console.log(feed);
