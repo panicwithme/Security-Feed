@@ -5,6 +5,7 @@ const urls = {
     'KrebsonSecurity'                 : 'https://krebsonsecurity.com/feed',
     'ThreatPost'                      : 'https://threatpost.com/feed',
     'National Vulnerability Database' : 'https://nvd.nist.gov/feeds/xml/cve/misc/nvd-rss-analyzed.xml',
+    'Schneier on Security'            : 'https://www.schneier.com:443/blog/atom.xml',
 };
 
 const renderFeeds = (feeds) => {
